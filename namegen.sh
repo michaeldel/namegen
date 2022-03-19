@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
-sources=(examples/colors.txt examples/nouns.txt)
+DEFAULT=examples/colors.txt:examples/nouns.txt
 
-for f in ${sources[@]}; do
+sources="${NAMEGEN_SOURCES:-$DEFAULT}"
+
+IFS=:; for f in $sources; do
     cat "$f" | shuf -n1
-done | paste -s - -d '-'
+done | paste -s - -d ' '
 
